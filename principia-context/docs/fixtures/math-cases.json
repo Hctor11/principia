@@ -1,0 +1,467 @@
+{
+  "schemaVersion": 1,
+  "status": "reference-cases-not-executed",
+  "variable": "x",
+  "numericTolerance": {
+    "absolute": 1e-09,
+    "relative": 1e-08
+  },
+  "notes": [
+    "Interpretar expectedDerivativeLatex por equivalencia matemática, no igualdad textual.",
+    "La entrada oficial es inputLatex; label es solo ayuda de lectura.",
+    "Los puntos excluidos provienen del dominio original aunque la derivada simplificada sea evaluable allí.",
+    "Convertir a pruebas del motor instalado después de la fase 0."
+  ],
+  "cases": [
+    {
+      "id": "constant",
+      "priority": "P0",
+      "label": "7",
+      "inputLatex": "7",
+      "order": 1,
+      "expectedDerivativeLatex": "0",
+      "samples": [
+        {
+          "x": 2,
+          "f": 7,
+          "d1": 0
+        }
+      ],
+      "excludedPoints": []
+    },
+    {
+      "id": "cubic",
+      "priority": "P0",
+      "label": "x^3-4x^2+2x",
+      "inputLatex": "x^3-4x^2+2x",
+      "order": 1,
+      "expectedDerivativeLatex": "3x^2-8x+2",
+      "samples": [
+        {
+          "x": 0,
+          "f": 0,
+          "d1": 2
+        },
+        {
+          "x": 2,
+          "f": -4,
+          "d1": -2
+        }
+      ],
+      "excludedPoints": []
+    },
+    {
+      "id": "product",
+      "priority": "P1",
+      "label": "x sin(x)",
+      "inputLatex": "x\\sin(x)",
+      "order": 1,
+      "expectedDerivativeLatex": "\\sin(x)+x\\cos(x)",
+      "samples": [
+        {
+          "x": 0,
+          "f": 0,
+          "d1": 0
+        },
+        {
+          "x": 1,
+          "f": 0.8414709848078965,
+          "d1": 1.3817732906760363
+        }
+      ],
+      "excludedPoints": []
+    },
+    {
+      "id": "chain",
+      "priority": "P1",
+      "label": "sin(x^2)",
+      "inputLatex": "\\sin(x^2)",
+      "order": 1,
+      "expectedDerivativeLatex": "2x\\cos(x^2)",
+      "samples": [
+        {
+          "x": 0,
+          "f": 0,
+          "d1": 0
+        },
+        {
+          "x": 1,
+          "f": 0.8414709848078965,
+          "d1": 1.0806046117362795
+        }
+      ],
+      "excludedPoints": []
+    },
+    {
+      "id": "quotient",
+      "priority": "P0",
+      "label": "(x^2+1)/(x+1)",
+      "inputLatex": "\\frac{x^2+1}{x+1}",
+      "order": 1,
+      "expectedDerivativeLatex": "\\frac{x^2+2x-1}{(x+1)^2}",
+      "samples": [
+        {
+          "x": 0,
+          "f": 1,
+          "d1": -1
+        },
+        {
+          "x": 1,
+          "f": 1,
+          "d1": 0.5
+        }
+      ],
+      "excludedPoints": [
+        -1
+      ]
+    },
+    {
+      "id": "reciprocal",
+      "priority": "P0",
+      "label": "1/x",
+      "inputLatex": "\\frac{1}{x}",
+      "order": 1,
+      "expectedDerivativeLatex": "-\\frac{1}{x^2}",
+      "samples": [
+        {
+          "x": -1,
+          "f": -1,
+          "d1": -1
+        },
+        {
+          "x": 2,
+          "f": 0.5,
+          "d1": -0.25
+        }
+      ],
+      "excludedPoints": [
+        0
+      ],
+      "graphAssertions": [
+        "No segment crosses x=0."
+      ]
+    },
+    {
+      "id": "cancelled-hole",
+      "priority": "P0",
+      "label": "(x^2-1)/(x-1)",
+      "inputLatex": "\\frac{x^2-1}{x-1}",
+      "order": 1,
+      "expectedDerivativeLatex": "1",
+      "samples": [
+        {
+          "x": 0,
+          "f": 1,
+          "d1": 1
+        },
+        {
+          "x": 2,
+          "f": 3,
+          "d1": 1
+        }
+      ],
+      "excludedPoints": [
+        1
+      ],
+      "graphAssertions": [
+        "Preserve original hole at x=1 for original function and domain-bound derivative inspection."
+      ]
+    },
+    {
+      "id": "identity-hole",
+      "priority": "P0",
+      "label": "x/x",
+      "inputLatex": "\\frac{x}{x}",
+      "order": 1,
+      "expectedDerivativeLatex": "0",
+      "samples": [
+        {
+          "x": 1,
+          "f": 1,
+          "d1": 0
+        }
+      ],
+      "excludedPoints": [
+        0
+      ]
+    },
+    {
+      "id": "zero-hole",
+      "priority": "P0",
+      "label": "0/x",
+      "inputLatex": "\\frac{0}{x}",
+      "order": 1,
+      "expectedDerivativeLatex": "0",
+      "samples": [
+        {
+          "x": 1,
+          "f": 0,
+          "d1": 0
+        }
+      ],
+      "excludedPoints": [
+        0
+      ]
+    },
+    {
+      "id": "natural-log",
+      "priority": "P1",
+      "label": "ln(x)",
+      "inputLatex": "\\ln(x)",
+      "order": 1,
+      "expectedDerivativeLatex": "\\frac{1}{x}",
+      "samples": [
+        {
+          "x": 1,
+          "f": 0,
+          "d1": 1
+        }
+      ],
+      "excludedPoints": [
+        -1,
+        0
+      ],
+      "domainCondition": "x>0"
+    },
+    {
+      "id": "square-root",
+      "priority": "P1",
+      "label": "sqrt(x)",
+      "inputLatex": "\\sqrt{x}",
+      "order": 1,
+      "expectedDerivativeLatex": "\\frac{1}{2\\sqrt{x}}",
+      "samples": [
+        {
+          "x": 4,
+          "f": 2,
+          "d1": 0.25
+        }
+      ],
+      "excludedPoints": [
+        -1
+      ],
+      "specialPoints": [
+        {
+          "x": 0,
+          "f": 0,
+          "finiteTangent": false
+        }
+      ],
+      "domainCondition": "x>=0; finite derivative for x>0"
+    },
+    {
+      "id": "tangent",
+      "priority": "P1",
+      "label": "tan(x)",
+      "inputLatex": "\\tan(x)",
+      "order": 1,
+      "expectedDerivativeLatex": "\\frac{1}{\\cos(x)^2}",
+      "samples": [
+        {
+          "x": 0,
+          "f": 0,
+          "d1": 1
+        }
+      ],
+      "excludedPoints": [],
+      "exactExcludedPointsLatex": [
+        "\\frac{\\pi}{2}",
+        "-\\frac{\\pi}{2}"
+      ],
+      "graphAssertions": [
+        "Do not connect through any known pole pi/2+k*pi in the viewport."
+      ]
+    },
+    {
+      "id": "exponential",
+      "priority": "P1",
+      "label": "exp(x)",
+      "inputLatex": "e^x",
+      "order": 1,
+      "expectedDerivativeLatex": "e^x",
+      "samples": [
+        {
+          "x": 0,
+          "f": 1,
+          "d1": 1
+        }
+      ],
+      "excludedPoints": [],
+      "specialPoints": [
+        {
+          "x": 1000,
+          "numericStatus": "non-finite"
+        }
+      ]
+    },
+    {
+      "id": "second-order",
+      "priority": "P1",
+      "label": "x^3",
+      "inputLatex": "x^3",
+      "order": 2,
+      "expectedDerivativeLatex": "6x",
+      "samples": [
+        {
+          "x": 2,
+          "f": 8,
+          "d1": 12,
+          "selectedDerivative": 12
+        }
+      ],
+      "excludedPoints": [],
+      "tangentCheck": {
+        "x": 1,
+        "slope": 3,
+        "selectedDerivative": 6
+      }
+    },
+    {
+      "id": "third-order",
+      "priority": "P1",
+      "label": "x^3",
+      "inputLatex": "x^3",
+      "order": 3,
+      "expectedDerivativeLatex": "6",
+      "samples": [
+        {
+          "x": 2,
+          "f": 8,
+          "d1": 12,
+          "selectedDerivative": 6
+        }
+      ],
+      "excludedPoints": []
+    },
+    {
+      "id": "negative-power",
+      "priority": "P1",
+      "label": "x^-2",
+      "inputLatex": "x^{-2}",
+      "order": 1,
+      "expectedDerivativeLatex": "-2x^{-3}",
+      "samples": [
+        {
+          "x": 2,
+          "f": 0.25,
+          "d1": -0.25
+        }
+      ],
+      "excludedPoints": [
+        0
+      ]
+    },
+    {
+      "id": "cosine",
+      "priority": "P1",
+      "label": "cos(x)",
+      "inputLatex": "\\cos(x)",
+      "order": 1,
+      "expectedDerivativeLatex": "-\\sin(x)",
+      "samples": [
+        {
+          "x": 0,
+          "f": 1,
+          "d1": 0
+        },
+        {
+          "x": 1,
+          "f": 0.5403023058681398,
+          "d1": -0.8414709848078965
+        }
+      ],
+      "excludedPoints": []
+    },
+    {
+      "id": "nested-log",
+      "priority": "P1",
+      "label": "ln(x^2)",
+      "inputLatex": "\\ln(x^2)",
+      "order": 1,
+      "expectedDerivativeLatex": "\\frac{2}{x}",
+      "samples": [
+        {
+          "x": -1,
+          "f": 0,
+          "d1": -2
+        },
+        {
+          "x": 1,
+          "f": 0,
+          "d1": 2
+        }
+      ],
+      "excludedPoints": [
+        0
+      ]
+    },
+    {
+      "id": "exponential-chain",
+      "priority": "P1",
+      "label": "exp(2x)",
+      "inputLatex": "e^{2x}",
+      "order": 1,
+      "expectedDerivativeLatex": "2e^{2x}",
+      "samples": [
+        {
+          "x": 0,
+          "f": 1,
+          "d1": 2
+        }
+      ],
+      "excludedPoints": []
+    }
+  ],
+  "rejections": [
+    {
+      "id": "empty",
+      "inputLatex": "",
+      "expectedCode": "EMPTY_INPUT"
+    },
+    {
+      "id": "extra-variable",
+      "inputLatex": "x+y",
+      "expectedCode": "UNSUPPORTED_SYMBOL"
+    },
+    {
+      "id": "absolute-value",
+      "inputLatex": "\\left|x\\right|",
+      "expectedCode": "UNSUPPORTED_OPERATOR"
+    },
+    {
+      "id": "ambiguous-log",
+      "inputLatex": "\\log(x)",
+      "expectedCode": "AMBIGUOUS_INPUT"
+    },
+    {
+      "id": "general-power",
+      "inputLatex": "x^x",
+      "expectedCode": "UNSUPPORTED_OPERATOR"
+    },
+    {
+      "id": "zero-denominator",
+      "inputLatex": "\\frac{1}{0}",
+      "expectedCode": "INVALID_EXPRESSION"
+    },
+    {
+      "id": "zero-over-zero",
+      "inputLatex": "\\frac{0}{0}",
+      "expectedCode": "INVALID_EXPRESSION"
+    },
+    {
+      "id": "zero-to-zero",
+      "inputLatex": "0^0",
+      "expectedCode": "INVALID_EXPRESSION"
+    },
+    {
+      "id": "complex-root",
+      "inputLatex": "\\sqrt{-1}",
+      "expectedCode": "INVALID_EXPRESSION"
+    },
+    {
+      "id": "real-log-negative",
+      "inputLatex": "\\ln(-1)",
+      "expectedCode": "INVALID_EXPRESSION"
+    }
+  ]
+}

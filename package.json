@@ -6,9 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test --test-isolation=none tests/math.test.ts tests/catalog.test.ts"
   },
   "dependencies": {
+    "@cortex-js/compute-engine": "^0.141.0",
+    "mafs": "^0.21.0",
+    "mathlive": "^0.110.0",
+    "motion": "^13.4.6",
     "next": "16.3.7",
     "react": "19.2.8",
     "react-dom": "19.2.8"

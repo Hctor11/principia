@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "covered-by-catalog-and-production-browser-tests",
+  "note": "Los registros sintéticos de pruebas no son calculadoras disponibles en producción.",
+  "scenarios": [
+    {"id":"brand-home","route":"/","expect":"Marca y título Principia; catálogo real."},
+    {"id":"direct-module","route":"/calculators/derivatives","expect":"Derivadas abre por enlace directo y refresh; título Derivadas | Principia."},
+    {"id":"round-trip","expect":"Home -> Derivadas -> home mantiene navegación funcional."},
+    {"id":"normalized-search","query":"DERIVACION","expect":"Encuentra Derivadas mediante el tag derivación normalizado."},
+    {"id":"no-results","query":"zzzz-no-match","expect":"Estado sin coincidencias; Limpiar recupera disponibles."},
+    {"id":"category-search","query":"pendiente","category":"calculus","expect":"Intersección de búsqueda y categoría encuentra Derivadas."},
+    {"id":"invalid-category","category":"nonexistent","expect":"Normalización a Todas; no crash ni filtro inválido visible."},
+    {"id":"planned-tool","expect":"Entrada sintética planned no tiene href ni acción Abrir; no aparece como resultado disponible."},
+    {"id":"empty-catalog","expect":"Registro sintético sin disponibles muestra estado vacío honesto."},
+    {"id":"duplicate-id-slug","expect":"Registro sintético duplicado falla validación de desarrollo/build."},
+    {"id":"broken-available-route","expect":"available con ruta inexistente falla aceptación/integración."},
+    {"id":"unknown-route","route":"/calculators/does-not-exist","expect":"404 real con enlace al catálogo."},
+    {"id":"module-failure","expect":"Error de módulo con reintento y catálogo accesible."},
+    {"id":"leave-during-compute","expect":"Salir termina worker; resultado tardío no modifica catálogo."},
+    {"id":"light-home","expect":"Home no importa/carga/ejecuta motores de módulos, incluso por prefetch."},
+    {"id":"accessible-mobile","expect":"Catálogo y enlaces operables por teclado y a 360px, sin overflow de página."}
+  ]
+}
